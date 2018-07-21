@@ -1,41 +1,50 @@
 import React from 'react'
-import {HashRouter as Router, Route, Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import { Redirect } from 'react-router'
+import { HashRouter as Router, Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
-import Lost from './Lost'
-import LostForm from './LostForm'
-import Found from './Found'
+import Profile from './Profile'
+import ToolPool from './ToolPool'
 
-const App = ({auth}) => (
-  <Router>
-    <div className="container has-text-centered">
+import { getGear } from "../actions/gear";
+import {fetchUser} from '../actions/login'
 
-      <div className="hero is-small is-success">
-        <div className="hero-body has-text-centered">
-          <Link to='/' className="">
-            <h1 className="title is-1">Lost and Found</h1>
-          </Link>
-          <Nav />
-        </div>
-      </div>
 
-      <div className=''>
-        {!auth.isAuthenticated ? <Redirect to="/login" /> : <Redirect to="/lost" />}
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route exact path="/lost" component={Lost} />
-        <Route path="/lost/new" component={LostForm} />
-        <Route path="/found" component={Found} />
-      </div>
-    </div>
-  </Router>
-)
 
-const mapStateToProps = ({auth}) => {
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  componentDidMount() {
+    this.props.dispatch(getGear())
+    this.props.auth.isAuthenticated && this.props.dispatch(fetchUser())
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="container has-text-centered">
+          <div className="hero is-small is-success">
+            <div className="hero-body has-text-centered">
+              <Link to='/'><h1 className="title is-1">Home</h1></Link>
+              <Nav />
+            </div>
+          </div>
+
+          <Route exact path='/toolpool' component={ToolPool}/>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          {this.props.auth.isAuthenticated && <Route exact path='/profile' component={Profile}/>}
+       </div>
+      </Router>
+    )
+  }
+} 
+
+const mapStateToProps = ({ auth }) => {
   return {
     auth
   }

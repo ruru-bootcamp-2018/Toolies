@@ -9,24 +9,39 @@ exports.seed = function(knex, Promise) {
       return knex('users').insert([
         {
           id: 1,
-          user_name: 'symesharr',
-          email_address: 'harrison@devacademy.co.nz',
-          contact_details: 'Ring the bell ;)',
-          hash: hashSync('Krang', saltRounds)
+          first_name: 'Bradley',
+          last_name: 'Adams',
+          user_name: 'wayneric',
+          email_address: 'brad@devacademy.co.nz',
+          profile_pic: 'https://i.ebayimg.com/images/g/AmAAAOSwPydZpDlm/s-l300.jpg',
+          hash: '$2a$12$3AFD0RA3To2A/rsyvJ/SjO6Z4JbrbZv2a7RJaQHZSYi/ZGrkeb7KK'
         },
         {
           id: 2,
-          user_name: 'haydenb',
+          first_name: 'Haydeen',
+          last_name: 'Blumont',
+          user_name: 'haydiggidydoc',
           email_address: 'hblummont1@gmail.com',
-          contact_details: 'Play RuPaul\'s Drag race theme loudly',
-          hash: hashSync('Krang', saltRounds)
+          profile_pic: 'http://getdrawings.com/img/person-silhouette-standing-4.jpg',
+          hash: '$2a$12$3AFD0RA3To2A/rsyvJ/SjO6Z4JbrbZv2a7RJaQHZSYi/ZGrkeb7KK'
         },
         {
           id: 3,
-          user_name: 'chuck',
-          email_address: 'rich@imrich.co.usa',
-          contact_details: 'Send a driver',
-          hash: hashSync('Krang', saltRounds)
+          first_name: 'Reuben',
+          last_name: 'Harcourt',
+          user_name: 'Reuban',
+          email_address: 'reuban@imrich.co.usa',
+          profile_pic: 'http://getdrawings.com/img/person-silhouette-standing-4.jpg',
+          hash: '$2a$12$3AFD0RA3To2A/rsyvJ/SjO6Z4JbrbZv2a7RJaQHZSYi/ZGrkeb7KK'
+        },
+        {
+          id: 4,
+          first_name: 'Stan',
+          last_name: 'Dan',
+          user_name: 'Diddly',
+          email_address: 'diddly@imcool.co.usa',
+          profile_pic: 'http://getdrawings.com/img/person-silhouette-standing-4.jpg',
+          hash: '$2a$12$3AFD0RA3To2A/rsyvJ/SjO6Z4JbrbZv2a7RJaQHZSYi/ZGrkeb7KK'
         }
       ]);
     });

@@ -23,7 +23,7 @@ function issue (req, res) {
 
 function createToken (user, secret) {
   return jwt.sign({
-    user_id:user.user_id,
+    user_id: user.id,
     user_name: user.user_name
   }, secret, {
     expiresIn: '24h'
@@ -38,8 +38,23 @@ function decode (req, res, next) {
   verifyJwt({secret: getSecret})(req, res, next)
 }
 
+function handleError (err, req, res, next) {
+  console.log('handling authentication error');
+  
+  if (err) {
+    return res.status(403).json({
+      message: 'Access to this resource was denied.',
+      error: err.message,
+      info: 'Missing credentials'
+    })
+  }
+  next()
+}
+
 module.exports = {
   issue,
   createToken,
-  decode
+  decode,
+  getSecret,
+  handleError
 }

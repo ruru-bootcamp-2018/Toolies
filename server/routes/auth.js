@@ -7,17 +7,17 @@ router.post('/register', register, token.issue)
 
 function register (req, res, next) {
   
-  const {user_name, contact_details, email_address, password} = req.body
+  const {first_name, last_name, user_name, email_address, password} = req.body
   userExists(user_name)
     .then(exists => {
       if (exists) return res.status(400).send({message: "User Name Taken"})
-      createUser(user_name, contact_details, email_address, password)
+      createUser(first_name, last_name, user_name, email_address, password)
         .then(() => next())
         .catch(err => {
           res.status(500).send({message: "Server Error"})
         })
     })
-    .catch(err => res.status(500).send({message: "Server Error"}))
+    .catch(err => res.status(500).send({message: "Server/db Error"}))
 }
 
 
