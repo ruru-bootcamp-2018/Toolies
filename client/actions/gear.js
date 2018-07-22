@@ -40,6 +40,22 @@ export function getGear() {
     }
   }
 
+
+  export function addGearItem(item) {
+    return dispatch => {
+      dispatch(requestGearSave())
+      return request('post', 'gear/new', item)
+        .then((res) => {
+          let newGear = res.body.gear
+          newGear.id = res.body.id
+          dispatch(gearAdd(newGear))
+        })
+        .catch(err => {
+          dispatch(gearError(err.response.body.message))
+        })
+    }
+  }
+
   export function requestGearSave () {
     return {
       type: 'REQUEST_GEAR_SAVE',
@@ -55,17 +71,31 @@ export function getGear() {
     }
   }
 
-  export function addGearItem(item) {
+  export function editGearItem(item){
     return dispatch => {
-      dispatch(requestGearSave())
-      return request('post', 'gear/new', item)
+      dispatch(editRequest())
+      return request('post', `gear/update/${item.id}`, item)
         .then((res) => {
-          let newGear = res.body.gear
-          newGear.id = res.body.id
-          dispatch(gearAdd(newGear))
+          let editedGear = res.body.gear
+          dispatch(editGear(editedGear))
         })
         .catch(err => {
           dispatch(gearError(err.response.body.message))
         })
+    }
+  }
+
+  export function editRequest () {
+    return {
+      type:'EDIT_REQUEST',
+      isFetching: false,
+      isSaving: true
+    }
+  }
+
+  export function editGear (item) {
+    return {
+      type: 'EDIT_GEAR',
+      item
     }
   }
