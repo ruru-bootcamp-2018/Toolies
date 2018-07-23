@@ -5,16 +5,18 @@
   "repository": "https://github.com/dev-academy-challenges/boilerplate-react-webpack.git",
   "main": "server/index.js",
   "scripts": {
-    "postinstall": "webpack",
+    "postinstall": "webpack && knex migrate:latest",
     "dev": "nodemon --watch server server/index & webpack --watch",
     "start": "node server/index",
-    "test": "jest --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "watch": "nodemon -e js,jsx -x npm test",
     "h:deploy": "git push heroku master",
     "h:migrate": "heroku run knex migrate:latest",
     "h:rollback": "heroku run knex migrate:rollback",
     "h:seed": "heroku run knex seed:run",
-    "knex": "knex"
+    "knex": "knex",
+    "dbsetup": "knex migrate:latest && knex seed:run"
   },
   "babel": {
     "presets": [
@@ -32,6 +34,7 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
     "babel-core": "^6.24.1",
     "babel-jest": "^23.4.0",
     "babel-loader": "^6.4.1",
@@ -43,6 +46,7 @@
     "body-parser": "^1.15.2",
     "cors": "^2.8.3",
     "dotenv": "^4.0.0",
+    "enzyme-adapter-react-15": "^1.0.6",
     "express": "^4.14.0",
     "express-jwt": "^5.3.0",
     "jest": "^23.4.0",
@@ -51,16 +55,22 @@
     "jsx-loader": "^0.13.2",
     "jwt-decode": "^2.2.0",
     "knex": "^0.13.0",
+    "nodemailer": "^4.6.7",
+    "nodemailer-smtp-transport": "^2.7.4",
     "passport": "^0.4.0",
     "pg": "^7.4.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
+    "react-star-rating-component": "^1.4.1",
     "react-test-renderer": "^15.5.4",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "sendmail": "^1.4.1",
     "superagent": "^2.2.0",
-    "webpack": "3"
+    "vue-star-rating": "^1.6.0",
+    "webpack": "3",
+    "xoauth2": "^1.2.0"
   }
 }

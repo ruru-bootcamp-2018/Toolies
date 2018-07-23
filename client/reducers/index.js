@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux'
 
 import auth from './auth'
-import lostPets from './lostPets'
-import foundPets from './foundPets'
+import user from './user'
+import gear from './gear'
 
 export default combineReducers({
   auth,
-  lostPets,
-  foundPets
+  user,
+  gear
 })
