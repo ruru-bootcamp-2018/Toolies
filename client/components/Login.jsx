@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {loginUser, loginError} from '../actions/login'
+import {loginUser} from '../actions/login'
 
-import { Redirect } from 'react-router'
 
 class Login extends React.Component {
   constructor(props) {
@@ -14,9 +13,7 @@ class Login extends React.Component {
     this.updateDetails = this.updateDetails.bind(this)
     this.submit = this.submit.bind(this)
   }
-  componentDidMount() {
-    this.props.dispatch(loginError(''))
-  }
+
   updateDetails(e) {
     this.setState({[e.target.name]: e.target.value})
   }

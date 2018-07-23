@@ -12,9 +12,10 @@ server.use(passport.initialize())
 server.use(bodyParser.json())
 server.use(express.static(path.join(__dirname, '../public')))
 
-
 server.use('/api/auth', require('./routes/auth'))
-server.use('/api/lost', require('./routes/lost'))
-server.use('/api/found', require('./routes/found'))
+server.use('/api/user', require('./routes/user'))
+server.use('/api/gear', require('./routes/gear'))
+server.use('/api/mail', require('./routes/mail'))
+server.use('/api/request', require('./routes/request'))
 
 module.exports = server
