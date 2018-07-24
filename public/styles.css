@@ -55,3 +55,19 @@
 .edit-profile {
     padding: 3rem;
 }
+
+.navlink a:link {
+  color: black;
+}
+
+.navLink a:visited {
+  color: black;
+}
+
+.navLink a.active {
+  color: hotpink;
+}
+
+.navSpace {
+  padding-left: 30px;
+}

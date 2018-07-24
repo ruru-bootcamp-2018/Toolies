@@ -12,25 +12,27 @@ class Nav extends React.Component {
   }
 
   render() {
+    console.log("path",this.props.location.pathname);
     return (
       <div className='section' id='navbar'>
-        <div className='columns is-centered has-text-centered'>
+        <div className='columns is-centered has-text-centered navLink'>
           <div className='column is-3'>
-            <p><Link to="/toolpool">ALL TOOLS</Link></p>
+            <p><Link className={this.props.location.pathname === "/toolpool" ? 'active' : ""} to="/toolpool">ALL TOOLS</Link></p>
           </div>
           <div className='column is-6'>
-            <h1 className='title is-3'><Link to="/">TOOLPOOL</Link></h1>
+            <h1 className={this.props.location.pathname === "/login" ? 'active title is-3' : "title is-3"}><Link to="/">TOOLPOOL</Link></h1>
           </div>
           <div className='column is-3'>
+            {console.log(this.props)}
             {this.props.auth.isAuthenticated
               ? [
                 <div>
-                <Link to="/profile">PROFILE</Link>
-                <Link className="navBarItem" to="/" onClick={this.props.logout}>LOGOUT</Link>
+                <Link className={this.props.location.pathname === "/profile" ? 'active' : ""} to="/profile">PROFILE</Link>
+                <Link className='navSpace' to="/" onClick={this.props.logout}>LOGOUT</Link>
                 </div>
                 ]
                 : [
-                  <Link to='/login'>LOGIN</Link>
+                  <Link className={this.props.location.pathname === "/login" ? 'active' : ""} to='/login'>LOGIN</Link>
                 ]
               }
           </div>
@@ -47,9 +49,10 @@ class Nav extends React.Component {
     }
   }
 
-  const mapStateToProps = ({ auth }) => {
+  const mapStateToProps = (state) => {
+    console.log(state);
     return {
-      auth
+      auth: state.auth
     }
   }
 
