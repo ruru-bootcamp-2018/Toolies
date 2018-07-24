@@ -1,3 +1,10 @@
 .tempimgcss {
     width: 400px;
 }
+.navbar-item.is-logo
+        position: absolute
+        left: 50%
+        margin-left: -63px // 50% in my case
+        height: 100%
+        display: flex
+        align-items: center

@@ -13,9 +13,9 @@ class Nav extends React.Component {
 
   render() {
     return (
-      <nav className="navbar">
+      <nav className="navbar is-fixed-top has-text-black">
         <div className="container">
-          <div id="navbarMenuHeroA" className='navbar-menu'>
+          <div id="navbarMenuHeroA" className='navbar-brand'>
             <div className="navbar-end">
               {this.props.auth.isAuthenticated
                 ? [
@@ -29,6 +29,7 @@ class Nav extends React.Component {
               }
               <Link className="navbar-item" to='/toolpool'>ToolPool</Link>
             </div>
+          <Link className="navbar-item is-half is-narrow" to='/'>Home Logo</Link>
           </div>
         </div>
       </nav>
