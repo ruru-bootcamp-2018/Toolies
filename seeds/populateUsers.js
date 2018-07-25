@@ -18,9 +18,9 @@ exports.seed = function(knex, Promise) {
         },
         {
           id: 2,
-          first_name: 'Haydeen',
-          last_name: 'Blumont',
-          user_name: 'haydiggidydoc',
+          first_name: 'Hayden',
+          last_name: 'Blummont',
+          user_name: 'haydenb23',
           email_address: 'hblummont@gmail.com',
           profile_pic: '/images/profiles/3.jpg',
           hash: '$2a$12$3AFD0RA3To2A/rsyvJ/SjO6Z4JbrbZv2a7RJaQHZSYi/ZGrkeb7KK'
