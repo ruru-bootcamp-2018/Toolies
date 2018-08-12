@@ -26,7 +26,7 @@ router.post('/new', (req, res) => {
         })
 })
 
-router.post('/update/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const update = req.body
     const id = req.params.id
 

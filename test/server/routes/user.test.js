@@ -42,7 +42,7 @@ describe('user route tests', () => {
     })
 
     it('update user route returns 200', () => {
-        return request.post('/api/user/update')
+        return request.put('/api/user/update')
             .set('Authorization', `Bearer ${fakeToken}`)
             .send(fakeUpdate)
             .expect(200)

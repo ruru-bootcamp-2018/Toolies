@@ -6,8 +6,6 @@ const gearDB = require('../db/gear')
 // public routes
 
 router.get('/single/:id', (req, res) => {
-  console.log('hit route');
-  
   const gearID = Number(req.params.id)
 
   gearDB.getGearByGearIdWithUsername(gearID)
@@ -51,7 +49,7 @@ router.post('/new', (req, res) => {
     .then(ids => {
       gearDB.getGearByGearIdWithUsername(ids[0])
         .then(gear => {
-          res.json(gear)
+          res.status(201).json(gear)
         })
     })
     .catch(err => {
@@ -62,7 +60,7 @@ router.post('/new', (req, res) => {
     })
 })
 
-router.post('/update/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
   const updateInfo = req.body
   const itemID = req.params.id
 
@@ -71,8 +69,6 @@ router.post('/update/:id', (req, res) => {
       res.status(200).send({numUpdates}) // rewrite test for this - should really test that it gets back the edited item
     })
     .catch(err => {
-      console.log(err);
-      
       res.status(500).send({
         message: 'error updating gear item',
         err

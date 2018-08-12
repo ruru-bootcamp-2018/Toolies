@@ -6,16 +6,18 @@ require('dotenv').config()
 
 jest.mock('../../../server/db/gear', () => ({
   getGearByGearIdWithUsername: id => id
-    ? Promise.resolve({ id, name: 'doodad', description: 'cool as' })
-    : Promise.reject('database err')
+  ? Promise.resolve({ id, name: 'doodad', description: 'cool as' })
+  : Promise.reject('database err')
   ,
-  getGearWithUsernames: () => Promise.resolve([1, 2, 3]),
+  getGearWithUsernames: jest.fn(),
   addGear: () => Promise.resolve([1]),
   updateGear: (updateInfo, itemID) => Promise.resolve((itemID == 1) ? 1 : 0),
   removeGearById: id => Promise.resolve((id == 1) ? 1 : 0),
   getGearByUserId: null,
   getGear: null
 }))
+
+import {getGearWithUsernames} from '../../../server/db/gear'
 
 describe('gear route tests', () => {
   describe('public routes', () => {
@@ -43,6 +45,8 @@ describe('gear route tests', () => {
     })
 
     it('get request for all gear', () => {
+      getGearWithUsernames.mockImplementation(() => Promise.resolve([1,2,3]))
+
       return request.get(`/api/gear/all`)
         .expect(200)
         .then(res => {
@@ -50,6 +54,13 @@ describe('gear route tests', () => {
 
           expect(gearList).toHaveLength(3)
         })
+    })
+
+    it('get request for all gear db rejection', () => {
+      getGearWithUsernames.mockImplementation(() => Promise.reject('test rejection'))
+
+      return request.get('/api/gear/all')
+        .expect(500)
     })
   })
 
@@ -74,7 +85,7 @@ describe('gear route tests', () => {
       return request.post('/api/gear/new')
         .set('Authorization', `Bearer ${fakeToken}`)
         .send(fakeGear)
-        .expect(200)
+        .expect(201)
         .then(res => {
           expect(res.body).toBeTruthy()
         })
@@ -87,7 +98,7 @@ describe('gear route tests', () => {
 
       const id = 1
 
-      return request.post(`/api/gear/update/${id}`)
+      return request.put(`/api/gear/update/${id}`)
         .set('Authorization', `Bearer ${fakeToken}`)
         .send(fakeGearUpdate)
         .expect(200)

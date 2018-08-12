@@ -23,7 +23,7 @@ function errorProfileEdit(message) {
 export function editProfileAction(profileUpdate) {
     return dispatch => {
         dispatch(requestProfileEdit())
-        return request('post', 'user/update', profileUpdate)
+        return request('put', 'user/update', profileUpdate)
             .then((res) => {
                 dispatch(succesfulProfileEdit(profileUpdate))
             })

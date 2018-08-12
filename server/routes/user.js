@@ -15,8 +15,6 @@ router.use(
 // routes below here protected
 
 router.get('/fullProfile', (req, res) => {
-  let user = {}
-
   Promise.all([
     getUserByName(req.user.user_name),
     getGearByUserId(req.user.user_id),
@@ -39,7 +37,7 @@ router.get('/fullProfile', (req, res) => {
     })
 })
 
-router.post('/update', (req, res) => {
+router.put('/update', (req, res) => {
   const userUpdate = req.body
   const userId = req.user.user_id
 

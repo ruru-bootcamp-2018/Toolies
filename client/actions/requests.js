@@ -123,7 +123,7 @@ function errorMessageUpdate(message) {
 export function manageMessageUpdate(id, update) {
     return dispatch => {
         dispatch(requestMessageUpdate())
-        request('post', `request/update/${id}`)
+        request('put', `request/update/${id}`)
             .send(update)
             .then(res => {
                 dispatch(successMessageUpdate(id, update))

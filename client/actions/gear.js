@@ -74,10 +74,8 @@ export function editGearItem(item) {
   delete item.user_name
   return dispatch => {
     dispatch(editRequest())
-    return request('post', `gear/update/${item.id}`, item)
+    return request('put', `gear/update/${item.id}`, item)
       .then((res) => {
-        console.log('successgul updated');
-        
         dispatch(editGear(item))
       })
       .catch(err => {
@@ -94,7 +92,7 @@ export function setAvailability(id, isAvailable) {
   return dispatch => { dispatch(editGearItem(update)) }
 }
 
-function editRequest() {
+export function editRequest() {
   return {
     type: 'EDIT_REQUEST',
     isFetching: false,
@@ -102,7 +100,7 @@ function editRequest() {
   }
 }
 
-function editGear(item) {
+export function editGear(item) {
   return {
     type: 'EDIT_GEAR',
     item

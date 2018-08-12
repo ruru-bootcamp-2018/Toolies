@@ -41,7 +41,7 @@ describe('request router tests', () => {
             message: 'new message'
         }
 
-        return request.post(`/api/request/update/${id}`)
+        return request.put(`/api/request/update/${id}`)
             .set('Authorization', `Bearer ${fakeToken}`)
             .send(fakeUpdate)
             .expect(200)
